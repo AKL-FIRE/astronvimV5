@@ -4,7 +4,7 @@ else
   ---@type LazySpec
   return {
     "olimorris/codecompanion.nvim",
-    event = "VeryLazy",
+    event = 'User AstroFile',
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",

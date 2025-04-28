@@ -33,22 +33,12 @@ return {
   { import = "astrocommunity.editing-support.nvim-devdocs" },
   { import = "astrocommunity.editing-support.vim-visual-multi" },
 
-  -- cmp
-  { import = "astrocommunity.completion.cmp-cmdline" },
-
   -- find and replace
   { import = "astrocommunity.search.grug-far-nvim" },
-
-  -- code-runner
-  { import = "astrocommunity.code-runner.compiler-nvim" },
 
   -- motion
   { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.motion.flash-nvim" },
-  {
-    "folke/flash.nvim",
-    keys = nil,
-  },
 
   -- lsp
   { import = "astrocommunity.lsp.actions-preview-nvim" },

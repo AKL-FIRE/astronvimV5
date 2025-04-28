@@ -19,6 +19,20 @@ return {
   opts = {
     templates = { "builtin", "user.restart_lsp" },
   },
+  dependencies = {
+    {
+      "AstroNvim/astrocore",
+      opts = {
+        mappings = {
+          n = {
+            ["<leader>X"] = { desc = " " .. "Task" },
+            ["<leader>Xr"] = { "<cmd>:OverseerRun<cr>", desc = "Run task" },
+            ["<leader>Xt"] = { "<cmd>:OverseerToggle<cr>", desc = "Toggle task log" },
+          }
+        }
+      }
+    }
+  },
   specs = {
     {
       "rebelot/heirline.nvim",
