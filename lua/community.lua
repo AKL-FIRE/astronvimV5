@@ -1,4 +1,4 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- AstroCommunity: import any community modules here
 -- We import this file in `lazy_setup.lua` before the `plugins/` folder.
@@ -25,9 +25,6 @@ return {
   vim.fn.executable "rustc" == 1 and { import = "astrocommunity.pack.rust" } or {},
   vim.fn.executable "bash" == 1 and { import = "astrocommunity.pack.bash" } or {},
   vim.fn.executable "javac" == 1 and { import = "astrocommunity.pack.java" } or {},
-
-  -- theme
-  { import = "astrocommunity.colorscheme.catppuccin" },
 
   -- editting
   { import = "astrocommunity.editing-support.nvim-devdocs" },
