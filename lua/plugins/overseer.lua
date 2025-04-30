@@ -17,7 +17,7 @@ return {
     "OverseerClearCache",
   },
   opts = {
-    templates = { "builtin", "user.restart_lsp" },
+    templates = { "builtin", "user.restart_lsp", "user.cpp_build" },
   },
   dependencies = {
     {
@@ -28,10 +28,10 @@ return {
             ["<leader>X"] = { desc = " " .. "Task" },
             ["<leader>Xr"] = { "<cmd>:OverseerRun<cr>", desc = "Run task" },
             ["<leader>Xt"] = { "<cmd>:OverseerToggle<cr>", desc = "Toggle task log" },
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   },
   specs = {
     {

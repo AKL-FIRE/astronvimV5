@@ -4,7 +4,7 @@ else
   ---@type LazySpec
   return {
     "olimorris/codecompanion.nvim",
-    event = 'User AstroFile',
+    event = "User AstroFile",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
@@ -133,6 +133,16 @@ else
       opts = {
         log_level = "ERROR",
         language = "中文",
+      },
+      extensions = {
+        mcphub = {
+          callback = "mcphub.extensions.codecompanion",
+          opts = {
+            make_vars = true,
+            make_slash_commands = true,
+            show_result_in_chat = true,
+          },
+        },
       },
     },
   }
