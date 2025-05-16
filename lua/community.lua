@@ -37,9 +37,6 @@ return {
   { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.motion.flash-nvim" },
 
-  -- lsp
-  { import = "astrocommunity.lsp.actions-preview-nvim" },
-
   -- test
   { import = "astrocommunity.test.neotest" },
 }
