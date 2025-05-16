@@ -25,7 +25,7 @@ return {
     -- Check supported formatters and linters
     -- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins/formatting
     -- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-    opts.sources = {
+    opts.sources = require("astrocore").list_insert_unique(opts.sources, {
       -- go
       null_ls.builtins.diagnostics.golangci_lint.with {
         timeout = 180000,
@@ -38,7 +38,7 @@ return {
 
       -- refactory
       null_ls.builtins.code_actions.refactoring,
-    }
+    })
     return opts -- return final config table
   end,
 }
