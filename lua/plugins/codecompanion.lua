@@ -35,11 +35,14 @@ else
                 vim.cmd "redrawstatus"
               end,
             },
-            {
-              condition = function(self) return self.processing end,
-              provider = " ",
-              hl = { fg = "yellow" },
-            },
+            condition = function() return require("utils").get_current_buf_filetype() == "codecompanion" end,
+            provider = function(self)
+              if self.processing then
+                return "✨ Working on an answer..."
+              else
+                return "📝 Ask me anything!"
+              end
+            end,
           }
           require("utils").set_component_left(opts, CodeCompanion)
           return opts
@@ -73,23 +76,10 @@ else
               model = {
                 default = "anthropic/claude-3.7-sonnet",
                 choices = {
+                  "openai/gpt-4.1",
                   "anthropic/claude-3.7-sonnet",
-                  "anthropic/claude-3.5-sonnet",
                   "deepseek/deepseek-chat-v3-0324",
-                  "deepseek/deepseek-r1",
                 },
-              },
-            },
-          })
-        end,
-        copilot = function()
-          return require("codecompanion.adapters").extend("copilot", {
-            schema = {
-              model = {
-                default = "claude-3.5-sonnet",
-              },
-              max_tokens = {
-                default = 8192,
               },
             },
           })
@@ -101,6 +91,11 @@ else
       strategies = {
         chat = {
           adapter = "openrouter",
+          tools = {
+            opts = {
+              auto_submit_success = true,
+            },
+          },
         },
         inline = {
           adapter = "openrouter",

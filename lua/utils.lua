@@ -67,4 +67,24 @@ function M.set_component_left(opts, component)
   table.insert(opts.statusline, index, component)
 end
 
+-- set_component_right set heirline component on the right side of the statusline
+function M.set_component_right(opts, component)
+  local index = 1
+  for i = #opts.statusline, 1, -1 do
+    if opts.statusline[i].provider == "%=" then
+      index = i + 1
+      break
+    end
+  end
+  table.insert(opts.statusline, index, component)
+end
+
+-- get_current_buf_filetype get current open buf filetype
+function M.get_current_buf_filetype()
+  local bufnr = vim.api.nvim_get_current_buf()
+  if not vim.api.nvim_buf_is_valid(bufnr) then return "" end
+  local ft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+  return ft
+end
+
 return M
