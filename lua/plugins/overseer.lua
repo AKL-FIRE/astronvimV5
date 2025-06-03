@@ -17,7 +17,7 @@ return {
     "OverseerClearCache",
   },
   opts = {
-    templates = { "builtin", "user.restart_lsp", "user.cpp_build" },
+    templates = { "builtin", "user.restart_lsp", "user.build", "user.jdt" },
   },
   dependencies = {
     {
