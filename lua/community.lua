@@ -39,4 +39,7 @@ return {
 
   -- test
   { import = "astrocommunity.test.neotest" },
+
+  -- theme
+  { import = "astrocommunity.colorscheme.catppuccin" },
 }
