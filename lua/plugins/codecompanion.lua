@@ -74,10 +74,10 @@ else
             },
             schema = {
               model = {
-                default = "anthropic/claude-3.7-sonnet",
+                default = "anthropic/claude-sonnet-4",
                 choices = {
                   "openai/gpt-4.1",
-                  "anthropic/claude-3.7-sonnet",
+                  "anthropic/claude-sonnet-4",
                   "deepseek/deepseek-chat-v3-0324",
                 },
               },
