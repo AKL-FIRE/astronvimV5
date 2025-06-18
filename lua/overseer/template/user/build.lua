@@ -15,7 +15,7 @@ return {
     },
   },
   condition = {
-    callback = function(search) return vim.fn.filereadable(vim.fn.getcwd() .. "/build.sh") end,
+    callback = function() return vim.fn.filereadable(vim.fn.getcwd() .. "/build.sh") == 1 end,
   },
   builder = function(params)
     return {
