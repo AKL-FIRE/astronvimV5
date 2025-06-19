@@ -11,8 +11,8 @@ return {
   opts = function(_, opts)
     local opt = {
       adapters = {
-        require "neotest-go" {
-          args = { '-gcflags="all=-l -N"', "-count=1", "-timeout=60s" },
+        require "neotest-golang" {
+          go_test_args = { "-v", "-gcflags=all=-l -N", "-count=1", "-timeout=60s" },
         },
       },
     }
