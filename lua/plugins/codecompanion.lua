@@ -4,7 +4,7 @@ else
   ---@type LazySpec
   return {
     "olimorris/codecompanion.nvim",
-    event = "User AstroFile",
+    cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions", "CodeCompanionCmd" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
@@ -16,38 +16,7 @@ else
         end,
       },
       { "echasnovski/mini.diff", opts = {} },
-      {
-        "rebelot/heirline.nvim",
-        opts = function(_, opts)
-          local CodeCompanion = {
-            static = {
-              processing = false,
-            },
-            update = {
-              "User",
-              pattern = "CodeCompanionRequest*",
-              callback = function(self, args)
-                if args.match == "CodeCompanionRequestStarted" then
-                  self.processing = true
-                elseif args.match == "CodeCompanionRequestFinished" then
-                  self.processing = false
-                end
-                vim.cmd "redrawstatus"
-              end,
-            },
-            condition = function() return require("utils").get_current_buf_filetype() == "codecompanion" end,
-            provider = function(self)
-              if self.processing then
-                return "✨ Working on an answer..."
-              else
-                return "📝 Ask me anything!"
-              end
-            end,
-          }
-          require("utils").set_component_left(opts, CodeCompanion)
-          return opts
-        end,
-      },
+      { "franco-ruggeri/codecompanion-spinner.nvim" },
       {
         "AstroNvim/astrocore",
         ---@param opts AstroCoreOpts
@@ -65,25 +34,7 @@ else
     },
     opts = {
       adapters = {
-        openrouter = function()
-          return require("codecompanion.adapters").extend("openai_compatible", {
-            env = {
-              url = "https://openrouter.ai/api",
-              api_key = "OPENROUTER_API_KEY",
-              chat_url = "/v1/chat/completions",
-            },
-            schema = {
-              model = {
-                default = "anthropic/claude-sonnet-4",
-                choices = {
-                  "openai/gpt-4.1",
-                  "anthropic/claude-sonnet-4",
-                  "deepseek/deepseek-chat-v3-0324",
-                },
-              },
-            },
-          })
-        end,
+        openrouter = function() return require "others.openrouter" end,
         opts = {
           -- proxy = "http://localhost:10086",
         },
@@ -138,6 +89,7 @@ else
             show_result_in_chat = true,
           },
         },
+        spinner = {},
       },
     },
   }
