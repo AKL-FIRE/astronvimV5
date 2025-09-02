@@ -11,6 +11,7 @@ return {
               servers = 0,
               status = "starting",
             },
+            condition = function() return package.loaded.mcphub and vim.bo.filetype == "codecompanion" end,
             update = {
               "User",
               pattern = "MCPHubStateChange",

@@ -64,6 +64,11 @@ function M.set_component_left(opts, component)
       break
     end
   end
+  local origin_provider = component.provider
+  if origin_provider then
+    local new_provider = function(self) return " " .. origin_provider(self) end
+    component.provider = new_provider
+  end
   table.insert(opts.statusline, index, component)
 end
 
@@ -75,6 +80,11 @@ function M.set_component_right(opts, component)
       index = i + 1
       break
     end
+  end
+  local origin_provider = component.provider
+  if origin_provider then
+    local new_provider = function(self) return " " .. origin_provider(self) end
+    component.provider = new_provider
   end
   table.insert(opts.statusline, index, component)
 end

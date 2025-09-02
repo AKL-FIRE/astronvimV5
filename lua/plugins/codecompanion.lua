@@ -15,7 +15,6 @@ else
           opts.file_types = require("astrocore").list_insert_unique(opts.file_types, { "codecompanion" })
         end,
       },
-      { "echasnovski/mini.diff", opts = {} },
       { "franco-ruggeri/codecompanion-spinner.nvim" },
       {
         "AstroNvim/astrocore",
@@ -31,12 +30,46 @@ else
           maps.v["ga"] = { "<cmd>codecompanionAdd<cr>", desc = "add selected content as chat context" }
         end,
       },
+      {
+        "rebelot/heirline.nvim",
+        opts = function(_, opts)
+          local IsCodeCompanion = function() return package.loaded.codecompanion and vim.bo.filetype == "codecompanion" end
+          local CodeCompanionCurrentContext = {
+            static = {
+              enabled = true,
+            },
+            condition = function(self)
+              return IsCodeCompanion() and _G.codecompanion_current_context ~= nil and self.enabled
+            end,
+            provider = function()
+              local bufname = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(_G.codecompanion_current_context), ":t")
+              return "[  " .. bufname .. " ]"
+            end,
+            hl = { fg = "gray", bg = "bg" },
+            update = {
+              "User",
+              pattern = { "CodeCompanionRequest*", "CodeCompanionContextChanged" },
+              callback = vim.schedule_wrap(function(self, args)
+                if args.match == "CodeCompanionRequestStarted" then
+                  self.enabled = false
+                elseif args.match == "CodeCompanionRequestFinished" then
+                  self.enabled = true
+                end
+                vim.cmd "redrawstatus"
+              end),
+            },
+          }
+          require("utils").set_component_right(opts, CodeCompanionCurrentContext)
+        end,
+      },
     },
     opts = {
       adapters = {
-        openrouter = function() return require "others.openrouter" end,
-        opts = {
-          -- proxy = "http://localhost:10086",
+        http = {
+          openrouter = function() return require "others.openrouter" end,
+          opts = {
+            -- proxy = "http://localhost:10086",
+          },
         },
       },
       strategies = {
