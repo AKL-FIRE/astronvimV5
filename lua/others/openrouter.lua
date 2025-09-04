@@ -359,7 +359,7 @@ return {
       mapping = "parameters",
       type = "enum",
       desc = "ID of the model to use. See the model endpoint compatibility table for details on which models work with the Chat API.",
-      default = "x-ai/grok-code-fast-1",
+      default = "anthropic/claude-sonnet-4",
       choices = {
         ["x-ai/grok-code-fast-1"] = { opts = { can_reason = true } },
         ["anthropic/claude-sonnet-4"] = { opts = { can_reason = true, has_vision = true } },
