@@ -50,6 +50,8 @@ fi
 # rust
 if [ ! -x "$(command rustup)" ]; then
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  echo "export PATH=$PATH:$HOME/.cargo/bin" >>~/.zshrc
+  export PATH=$PATH:$HOME/.cargo/bin
 fi
 
 # auto install tools
@@ -57,13 +59,13 @@ fi
 if [ ! -x "$(command -v nvim)" ]; then
   curl -Lo nvim.tar.gz https://github.com/neovim/neovim-releases/releases/download/stable/nvim-linux-x86_64.tar.gz
   sudo tar -C /usr/local -xzf nvim.tar.gz
-  echo "export PATH=$PATH:/usr/local/nvim-linux-x86_64" >>"$HOME"/.zshrc
-  export PATH=$PATH:/usr/local/nvim-linux-x86_64
+  echo "export PATH=$PATH:/usr/local/nvim-linux-x86_64/bin" >>"$HOME"/.zshrc
+  export PATH=$PATH:/usr/local/nvim-linux-x86_64/bin
   rm nvim.tar.gz
 fi
 # 2. ripgrep
 if [ ! -x "$(command -v rg)" ]; then
-  cargo binstall ripgrep
+  cargo install ripgrep --locked
 fi
 # 3. lazygit
 if [ ! -x "$(command -v lazygit)" ]; then
@@ -85,6 +87,10 @@ if [ ! -x "$(command -v pyenv)" ]; then
     echo "[[ -d \$PYENV_ROOT/bin ]] && export PATH=\"\$PYENV_ROOT/bin:\$PATH\""
     echo "eval \"\$(pyenv init - zsh)\""
   } >>"$HOME"/.zshrc
+fi
+# 7. fd-find
+if [ ! -x "$(command -v fd)" ]; then
+  cargo install fd-find --locked
 fi
 
 # source zsh (only if .zshrc exists)
