@@ -43,7 +43,12 @@ else
             end,
             provider = function()
               local bufname = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(_G.codecompanion_current_context), ":t")
-              return "[  " .. bufname .. " ]"
+              local metadata = _G.codecompanion_chat_metadata
+                and _G.codecompanion_chat_metadata[vim.api.nvim_get_current_buf()]
+              local adapter = metadata and metadata.adapter or nil
+              local adapter_name = adapter and adapter.name or "unknown"
+              local model = adapter and adapter.model or "unknown"
+              return "[  " .. bufname .. " ]" .. " [ " .. adapter_name .. " - " .. model .. " ] "
             end,
             hl = { fg = "gray", bg = "bg" },
             update = {
@@ -69,12 +74,13 @@ else
           openrouter = function() return require "others.openrouter" end,
           opts = {
             -- proxy = "http://localhost:10086",
+            show_model_choices = true,
           },
         },
       },
       strategies = {
         chat = {
-          adapter = "openrouter",
+          adapter = "copilot",
           tools = {
             opts = {
               auto_submit_success = true,
@@ -82,7 +88,7 @@ else
           },
         },
         inline = {
-          adapter = "openrouter",
+          adapter = "copilot",
           keymaps = {
             reject_change = {
               modes = {
@@ -92,16 +98,16 @@ else
           },
         },
         agent = {
-          adapter = "openrouter",
+          adapter = "copilot",
         },
         cmd = {
-          adapter = "openrouter",
+          adapter = "copilot",
         },
       },
       display = {
         chat = {
           render_headers = false,
-          show_settings = true, -- Show LLM settings at the top of the chat buffer?
+          show_settings = false, -- Show LLM settings at the top of the chat buffer?
           show_token_count = true, -- Show the token count for each response?
           start_in_insert_mode = true,
         },
