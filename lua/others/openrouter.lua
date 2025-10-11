@@ -359,10 +359,10 @@ return {
       mapping = "parameters",
       type = "enum",
       desc = "ID of the model to use. See the model endpoint compatibility table for details on which models work with the Chat API.",
-      default = "anthropic/claude-sonnet-4",
+      default = "anthropic/claude-sonnet-4.5",
       choices = {
         ["x-ai/grok-code-fast-1"] = { opts = { can_reason = true } },
-        ["anthropic/claude-sonnet-4"] = { opts = { can_reason = true, has_vision = true } },
+        ["anthropic/claude-sonnet-4.5"] = { opts = { can_reason = true, has_vision = true } },
         ["qwen/qwen3-coder"] = { opts = { can_reason = false, has_vision = true } },
         ["deepseek/deepseek-chat-v3.1"] = { opts = { can_reason = true } },
         ["openai/gpt-5"] = { opts = { can_reason = true, has_vision = true } },
@@ -382,7 +382,7 @@ return {
         end
         return false
       end,
-      default = false,
+      default = true,
       desc = "Enable extended thinking for more thorough reasoning. Requires thinking_budget to be set.",
     },
     ---@type CodeCompanion.Schema
