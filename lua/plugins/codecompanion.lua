@@ -53,7 +53,12 @@ else
             hl = { fg = "gray", bg = "bg" },
             update = {
               "User",
-              pattern = { "CodeCompanionRequest*", "CodeCompanionContextChanged" },
+              pattern = {
+                "CodeCompanionRequest*",
+                "CodeCompanionContextChanged",
+                "CodeCompanionChatAdapter",
+                "CodeCompanionChatModel",
+              },
               callback = vim.schedule_wrap(function(self, args)
                 if args.match == "CodeCompanionRequestStarted" then
                   self.enabled = false
