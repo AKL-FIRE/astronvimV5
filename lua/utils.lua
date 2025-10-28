@@ -1,6 +1,7 @@
 local M = {}
 
--- get the os name {"mac" or "linux" or "win"}
+-- get the os name
+---@return "mac" | "linux" | "linux-wsl" | "win"
 function M.get_os()
   local os
   if vim.fn.has "mac" == 1 then
@@ -17,6 +18,7 @@ function M.get_os()
 end
 
 -- get current buf relative path
+---@return string
 function M.get_buf_parent_directory_relative_path()
   local current_buf = vim.api.nvim_get_current_buf()
   local current_buf_name = vim.api.nvim_buf_get_name(current_buf)
@@ -42,17 +44,6 @@ function M.set_wsl_clipboard()
     clipboard["cache_enabled"] = 0
     g.clipboard = clipboard
   end
-end
-
--- osc52 clipboard provider config
-function M.set_osc52_clipboard()
-  local function copy(lines, _) require("osc52").copy(table.concat(lines, "\n")) end
-  local function paste() return { vim.fn.split(vim.fn.getreg "", "\n"), vim.fn.getregtype "" } end
-  vim.g.clipboard = {
-    name = "osc52",
-    copy = { ["+"] = copy, ["*"] = copy },
-    paste = { ["+"] = paste, ["*"] = paste },
-  }
 end
 
 -- set_component_left set heirline component on the left side of the statusline
