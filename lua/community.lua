@@ -42,4 +42,7 @@ return {
 
   -- theme
   { import = "astrocommunity.colorscheme.catppuccin" },
+
+  -- recipes
+  { import = "astrocommunity.recipes.picker-lsp-mappings" },
 }
