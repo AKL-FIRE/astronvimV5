@@ -2,12 +2,28 @@ return {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",
   build = ":Copilot auth",
-  event = "BufReadPost",
+  event = "InsertEnter",
   opts = {
     suggestion = {
       auto_trigger = true,
       keymap = {
         accept = false, -- handled by completion engine
+        dismiss = "<C-x>",
+      },
+    },
+    nes = {
+      enabled = false,
+      auto_trigger = true,
+      keymap = {
+        accept_and_goto = "<tab>", -- use tab to accept suggestion and go to next in normal mode
+        dismiss = "<Esc>",
+      },
+    },
+    server_opts_overrides = {
+      settings = {
+        nextEditSuggestions = {
+          enabled = true,
+        },
       },
     },
     filetypes = {
@@ -19,6 +35,9 @@ return {
       java = true,
       thrift = true,
       protobuf = true,
+      json = true,
+      yaml = true,
+      toml = true,
     },
   },
   specs = {
