@@ -1,6 +1,9 @@
 return {
   "folke/sidekick.nvim",
-  event = "BufReadPost",
+  dependencies = {
+    "zbirenbaum/copilot.lua",
+  },
+  event = "InsertLeave",
   opts = {
     -- add any options here
     cli = {
@@ -39,6 +42,11 @@ return {
       -- Or to select only installed tools:
       -- require("sidekick.cli").select({ filter = { installed = true } })
       desc = "Select CLI",
+    },
+    {
+      "<leader>Ad",
+      function() require("sidekick.cli").close() end,
+      desc = "Detach a CLI Session",
     },
     {
       "<leader>At",
