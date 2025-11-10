@@ -7,6 +7,11 @@ return {
     "nvim-lua/plenary.nvim",
     "antoinemadec/FixCursorHold.nvim",
     "nvim-treesitter/nvim-treesitter",
+    {
+      "fredrikaverpil/neotest-golang",
+      optional = true,
+      tag = "v1.15.1",
+    },
   },
   opts = function(_, opts)
     local opt = {
