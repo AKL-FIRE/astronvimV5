@@ -13,6 +13,7 @@ return {
       end,
     },
     { "franco-ruggeri/codecompanion-spinner.nvim" },
+    { "ravitemer/codecompanion-history.nvim" },
     {
       "AstroNvim/astrocore",
       ---@param opts AstroCoreOpts
@@ -78,7 +79,7 @@ return {
           return require("codecompanion.adapters").extend("copilot", {
             schema = {
               model = {
-                default = "claude-haiku-4.5",
+                default = "gpt-5.2",
               },
             },
           })
@@ -137,6 +138,7 @@ return {
         },
       },
       spinner = {},
+      history = {},
     },
   },
 }
